@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise'
 
 // Obtenemos las variables de entorno necesarias mediante destructuring.
-import { MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB } from '../../env.js'
+import { MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB, MYSQL_PORT } from '../../env.js'
 
 // Variable que almacená un grupo (array) de conexiones.
 let pool
@@ -16,6 +16,7 @@ const getPool = async () => {
         host: MYSQL_HOST,
         user: MYSQL_USER,
         password: MYSQL_PASS,
+        port: MYSQL_PORT || 3306,
       })
 
       // Con el pool temporal creamos la base de datos si no existe.
@@ -28,6 +29,7 @@ const getPool = async () => {
         user: MYSQL_USER,
         password: MYSQL_PASS,
         database: MYSQL_DB,
+        port: MYSQL_PORT || 3306,
         // Zona horaria del servidor de MySQL. Por defecto es "local", que nos sirve si tenemos el server de Node y de MySQL en el mismo PC. Si tuviésemos el servidor de Node en un sitio con zona horaria "x" y el de MySQL en zona horaria "y", habría que colocar la zona horaria "y"
         timezone: 'local',
       })
@@ -36,7 +38,7 @@ const getPool = async () => {
     // Retornamos un pool.
     return pool
   } catch (err) {
-    //console.error(err);
+    console.error(err.message)
     throw err
   }
 }
