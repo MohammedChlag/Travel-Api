@@ -45,5 +45,5 @@ app.use(errorController)
 
 // Ponemos el servidor a escuchar peticiones en un puerto dado.
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`)
+  console.log(`Servidor escuchando en http://localhost:${PORT || 3000}`)
 })
