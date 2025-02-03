@@ -36,6 +36,7 @@ export const savePhotoService = async (img, width) => {
 
     // Ruta absoluta a la imagen.
     const imgPath = path.join(uploadsDir, imgName)
+    console.log('imgPath', imgPath)
 
     // Guardamos la imagen en la carpeta de subida de archivos.
     await sharpImg.toFile(imgPath)
